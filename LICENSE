@@ -1,0 +1,133 @@
+Matha Atlas Source Available License 1.0
+
+Copyright (c) 2026 Revanth Matha
+
+This license applies to the original Matha Atlas source code and
+documentation in this repository (the "Software"). Third-party components
+remain governed by their own licenses, as identified in
+THIRD_PARTY_NOTICES.md and in the notices accompanying those components.
+
+1. Definitions
+
+"You" means the individual or legal entity exercising rights under this
+license. "Organization" means You and, if You are a legal entity, every
+entity that controls, is controlled by, or is under common control with You.
+If an individual exercises rights on behalf of a legal entity, that legal
+entity and its controlled, controlling, and commonly controlled entities are
+the Organization. "Control" means direct or indirect ownership of more than
+50% of the voting interests, or the power to direct management and policies.
+
+"Product" means any product, application, service, or deployment that uses,
+incorporates, is based on, or is derived from the Software.
+
+"Monthly Active User" or "MAU" means a unique natural person who, during a
+calendar month, actively uses or interacts with a Product. A person is
+counted only once per calendar month across all accounts, devices, Product
+instances, deployments, and affiliates within the Organization. Each
+automated agent, service account, or API client counts as one MAU unless it
+acts solely for a natural person already counted that month, in which case
+it does not add another MAU. Reasonable, consistently applied methods may be
+used to deduplicate users.
+
+"Annual License Period" means each consecutive twelve-month period beginning
+on the effective date of the applicable commercial agreement.
+
+2. Source-available grant
+
+Subject to every condition in this license, the copyright holder grants You
+a worldwide, non-exclusive, non-transferable, non-sublicensable,
+royalty-free license to use, reproduce, modify, create derivative works of,
+and distribute the Software, in source or object form, solely while the
+Organization has no more than 100,000 MAUs in every calendar month.
+
+You may distribute the Software or a derivative work only if You:
+
+  a. include this license and THIRD_PARTY_NOTICES.md with the distribution;
+  b. retain all copyright, attribution, and third-party license notices;
+  c. conspicuously identify files You materially modified; and
+  d. do not state or imply that the copyright holder endorses Your Product.
+
+Recipients receive rights only under this license and must independently
+satisfy its conditions. You may charge for Your Product, support, hosting,
+or distribution, subject to the MAU limit and all other terms here.
+
+3. Use above 100,000 MAUs
+
+The grant in Section 2 does not authorize use by an Organization whose
+Product exceeds 100,000 MAUs in any calendar month. Before continuing that
+use, the Organization must enter into a separate written commercial
+agreement with the copyright holder.
+
+The standard commercial pricing basis is an annual fee of US $1 for each
+MAU above 100,000. Unless the separate commercial agreement states another
+measurement method, the annual fee is calculated as:
+
+  US $1 x (the highest MAU count recorded in any calendar month during the
+  Annual License Period minus 100,000), with a minimum result of zero.
+
+For example, if the highest monthly count during an Annual License Period is
+125,000 MAUs, the standard annual fee basis is US $25,000.
+
+Payment alone does not create a commercial license. The written commercial
+agreement controls the commercial grant, payment schedule, reporting,
+support, warranties, and any terms that differ from this license. Contact
+the repository owner through https://github.com/RevanthM to request an
+agreement before exceeding the threshold.
+
+4. Measurement and records
+
+You are responsible for measuring MAUs in good faith using a reasonable and
+consistently applied method. An Organization operating near or above the
+threshold must retain sufficient aggregate records to substantiate its MAU
+counts for three years. The copyright holder may request a written MAU
+certification no more than once per twelve-month period, unless there is a
+reasonable basis to suspect a material undercount. No provision of this
+license requires collecting personal data that the Product would not
+otherwise collect; aggregate, privacy-preserving records are sufficient.
+
+5. No trademark license
+
+This license does not grant permission to use the names, logos, or marks of
+Matha Atlas or the copyright holder except as reasonably necessary to
+describe the origin of the Software and reproduce required notices.
+
+6. Compliance and termination
+
+Your rights terminate automatically if You breach this license. If this is
+Your first breach and You cure it within 30 days after receiving written
+notice from the copyright holder, Your rights are reinstated automatically
+as of the date of cure. Rights terminated for an uncured or repeated breach
+may be reinstated only in writing by the copyright holder.
+
+Sections 4 through 8 survive termination. Termination does not alter rights
+properly granted to a recipient before termination, provided that recipient
+remains in compliance.
+
+7. Disclaimer of warranty
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SOFTWARE IS PROVIDED "AS IS"
+AND WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+TITLE, AND NON-INFRINGEMENT. YOU BEAR ALL RISK ARISING FROM USE OR
+DISTRIBUTION OF THE SOFTWARE.
+
+8. Limitation of liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COPYRIGHT HOLDER AND
+CONTRIBUTORS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, CONSEQUENTIAL, OR OTHER DAMAGES, OR FOR LOST PROFITS,
+DATA, GOODWILL, OR BUSINESS INTERRUPTION, ARISING FROM OR RELATED TO THE
+SOFTWARE OR THIS LICENSE, UNDER ANY LEGAL THEORY, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+
+9. Entire license
+
+This license states the complete source-available grant for the original
+Software unless the copyright holder and You sign a separate written
+agreement. If any provision is unenforceable, it will be reformed only to
+the minimum extent necessary, and the remaining provisions will continue in
+effect.
+
+This is a source-available license, not an open-source license approved by
+the Open Source Initiative. Obtain legal advice before relying on this text
+for a production commercial licensing program.

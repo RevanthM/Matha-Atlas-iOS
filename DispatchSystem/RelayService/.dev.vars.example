@@ -1,0 +1,2 @@
+# Generate a unique value locally. Never commit the real RelayService/.dev.vars file.
+PAIRING_SECRET="replace-with-a-random-64-character-hex-value"
