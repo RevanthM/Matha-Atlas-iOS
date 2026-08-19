@@ -3,6 +3,7 @@ import SwiftUI
 struct ChatDrawerView: View {
     @EnvironmentObject private var store: ChatStore
     @EnvironmentObject private var knowledgeStore: KnowledgeStore
+    @ObservedObject private var bridge = InferenceBridge.shared
 
     let close: () -> Void
     let openModel: () -> Void
@@ -10,6 +11,7 @@ struct ChatDrawerView: View {
     let openKnowledge: () -> Void
     let openGenerationSettings: () -> Void
     let openDispatch: () -> Void
+    let openBridge: () -> Void
 
     @State private var searchText = ""
     @State private var chatToRename: ChatSession?
@@ -241,6 +243,14 @@ struct ChatDrawerView: View {
                     icon: "paperplane",
                     title: "Dispatch center",
                     detail: "Agents · desktop · iPhone"
+                )
+            }
+
+            Button(action: openBridge) {
+                toolRow(
+                    icon: "eyeglasses",
+                    title: "Inference bridge",
+                    detail: bridge.runState.isServing ? bridge.advertisedBaseURL : "Off · paired apps use Gemma here"
                 )
             }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		004301973B3B1D961390DA3B /* InferenceBridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D9EB590D39B0279D93F27E /* InferenceBridgeView.swift */; };
+		04E9ED070FB7D2F8F8CA62A0 /* InferenceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77145673AC28C52ED9FD0024 /* InferenceBridge.swift */; };
 		11402227BE11772EA5B87A1B /* ModelSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2467F748DBF7EF7D7B02F6F8 /* ModelSetupView.swift */; };
 		198DFFEBD3202F5FFF953D98 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F965027309207C8C1AED5F /* AudioRecorder.swift */; };
 		20198C421C7A27A3A6342629 /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FC462D071C06E109F1C1F2 /* PerformanceView.swift */; };
@@ -34,6 +36,7 @@
 		DA9CA6BFB1E3A0B796BF2B38 /* ChatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50287E7498C2872EE2430AFA /* ChatStore.swift */; };
 		E890E62E687D451B007D81D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37797C8651357715411F469B /* Assets.xcassets */; };
 		E8EC3F2769E34EF1DF1AC7C8 /* KnowledgeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC0BA9BDA323D4116CFE04F /* KnowledgeStore.swift */; };
+		E998F58871E8D8D65F0BCBF8 /* BridgeHTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628A03257454B5CFD4A01D70 /* BridgeHTTPServer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		50287E7498C2872EE2430AFA /* ChatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStore.swift; sourceTree = "<group>"; };
 		530C4BDFC1DF89E67228A6CF /* GenerationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationSettingsView.swift; sourceTree = "<group>"; };
 		558E6D61B74D3B492A886171 /* LocalSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSkillsView.swift; sourceTree = "<group>"; };
+		628A03257454B5CFD4A01D70 /* BridgeHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeHTTPServer.swift; sourceTree = "<group>"; };
+		63D9EB590D39B0279D93F27E /* InferenceBridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceBridgeView.swift; sourceTree = "<group>"; };
+		77145673AC28C52ED9FD0024 /* InferenceBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceBridge.swift; sourceTree = "<group>"; };
 		7B5FF1DDBAA8E64ED4B50C66 /* MCPServersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPServersView.swift; sourceTree = "<group>"; };
 		7DD5C6BA991699B85C1EF9D9 /* LocalTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTools.swift; sourceTree = "<group>"; };
 		8FC0BA9BDA323D4116CFE04F /* KnowledgeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeStore.swift; sourceTree = "<group>"; };
@@ -103,7 +109,9 @@
 			children = (
 				9FBEE6A81A470A423606B0A6 /* AttachmentProcessor.swift */,
 				F8F965027309207C8C1AED5F /* AudioRecorder.swift */,
+				628A03257454B5CFD4A01D70 /* BridgeHTTPServer.swift */,
 				50287E7498C2872EE2430AFA /* ChatStore.swift */,
+				77145673AC28C52ED9FD0024 /* InferenceBridge.swift */,
 				8FC0BA9BDA323D4116CFE04F /* KnowledgeStore.swift */,
 				24917BF5976CAD147EEBC4B1 /* LocalSkillStore.swift */,
 				7DD5C6BA991699B85C1EF9D9 /* LocalTools.swift */,
@@ -130,6 +138,7 @@
 				2350E420619155029C6F0681 /* ChatHistoryView.swift */,
 				0A19C1C7A5A3292AA7516021 /* ChatView.swift */,
 				530C4BDFC1DF89E67228A6CF /* GenerationSettingsView.swift */,
+				63D9EB590D39B0279D93F27E /* InferenceBridgeView.swift */,
 				EA23D467CEDCD6D7F83667D5 /* KnowledgeView.swift */,
 				558E6D61B74D3B492A886171 /* LocalSkillsView.swift */,
 				7B5FF1DDBAA8E64ED4B50C66 /* MCPServersView.swift */,
@@ -258,12 +267,15 @@
 				32BD81FA057C31BE9074FAE3 /* AppModels.swift in Sources */,
 				4BD39616FE5875E7435865DC /* AttachmentProcessor.swift in Sources */,
 				198DFFEBD3202F5FFF953D98 /* AudioRecorder.swift in Sources */,
+				E998F58871E8D8D65F0BCBF8 /* BridgeHTTPServer.swift in Sources */,
 				C39A543011DD08F71B7B8DAC /* CameraPicker.swift in Sources */,
 				645A3EFD86FC8B65E0DCF6E6 /* ChatDrawerView.swift in Sources */,
 				D9838DFEDBF95A7D39EE3811 /* ChatHistoryView.swift in Sources */,
 				DA9CA6BFB1E3A0B796BF2B38 /* ChatStore.swift in Sources */,
 				5447E14D4B6A5DCDC2B6FA65 /* ChatView.swift in Sources */,
 				41346DAA896378DF2CD2A03D /* GenerationSettingsView.swift in Sources */,
+				04E9ED070FB7D2F8F8CA62A0 /* InferenceBridge.swift in Sources */,
+				004301973B3B1D961390DA3B /* InferenceBridgeView.swift in Sources */,
 				E8EC3F2769E34EF1DF1AC7C8 /* KnowledgeStore.swift in Sources */,
 				D62A15998CA64CBC030576AF /* KnowledgeView.swift in Sources */,
 				5A5DD8FDA059C5EA4A146764 /* LocalGemmaApp.swift in Sources */,

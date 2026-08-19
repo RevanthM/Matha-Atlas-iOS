@@ -12,6 +12,7 @@ final class ChatStore: ObservableObject {
     @Published private(set) var metricHistory: [GenerationMetrics] = []
     @Published private(set) var runningPerformanceTestTokenLimit: Int?
     @Published private(set) var generationSettings: GenerationSettings
+    @Published private(set) var bridgeInFlight = false
     @Published var errorMessage: String?
 
     private var engine: Engine?
@@ -50,7 +51,7 @@ final class ChatStore: ObservableObject {
     }
 
     var isBusy: Bool {
-        generationTask != nil || isRunningPerformanceTest
+        generationTask != nil || isRunningPerformanceTest || bridgeInFlight
     }
 
     var isRunningPerformanceTest: Bool {
@@ -120,6 +121,8 @@ final class ChatStore: ObservableObject {
             ExperimentalFlags.enableBenchmark = true
             ExperimentalFlags.enableSpeculativeDecoding = true
             ExperimentalFlags.visualTokenBudget = 140
+            // Needed so bridge clients can pin answers to a JSON schema.
+            ExperimentalFlags.enableConversationConstrainedDecoding = true
 
             let config = try EngineConfig(
                 modelPath: modelURL.path,
@@ -141,6 +144,7 @@ final class ChatStore: ObservableObject {
             status = .failed(error.localizedDescription)
             errorMessage = "Gemma 4 could not load: \(error.localizedDescription)"
         }
+        InferenceBridge.shared.attach(provider: self)
     }
 
     func unload() {
@@ -654,6 +658,110 @@ final class ChatStore: ObservableObject {
             return recoveredMessage
         }
         return recovered
+    }
+}
+
+// MARK: - Local inference bridge
+
+/// Serves prompts from trusted local clients (the InspectAR glasses survey app)
+/// using the engine that is already resident for chat. A second `Engine` would
+/// mean a second 2.5 GB of weights, so the bridge borrows this one instead.
+///
+/// Each request gets a throwaway `Conversation`: bridge traffic never lands in
+/// the operator's chat history, and one client cannot read another's context.
+extension ChatStore: BridgeInferenceProviding {
+    var bridgeModelName: String { "Gemma 4 E2B" }
+
+    var bridgeEngineState: String {
+        switch status {
+        case .unloaded: "unloaded"
+        case .loading: "loading"
+        case .ready: "ready"
+        case .generating: "generating"
+        case .failed: "failed"
+        }
+    }
+
+    var bridgeAcceptsWork: Bool {
+        engine != nil && !isBusy
+    }
+
+    func runBridgeGeneration(
+        _ request: BridgeGenerationRequest,
+        onDelta: @escaping (String) -> Void
+    ) async throws -> BridgeGenerationResult {
+        guard let engine else { throw BridgeInferenceError.modelNotLoaded }
+        guard !isBusy else { throw BridgeInferenceError.busy }
+
+        bridgeInFlight = true
+        defer { bridgeInFlight = false }
+
+        let responseFormat: ResponseFormat?
+        if let schema = request.jsonSchema {
+            do {
+                responseFormat = try ResponseFormat.json(schema: schema)
+            } catch {
+                throw BridgeInferenceError.invalidSchema
+            }
+        } else {
+            responseFormat = nil
+        }
+
+        let sampler = try SamplerConfig(
+            topK: request.topK,
+            topP: Float(request.topP),
+            temperature: Float(request.temperature)
+        )
+        let thinking = ThinkingConfig(
+            enableThinking: request.thinkingEnabled,
+            thinkingTokenBudget: request.thinkingBudget
+        )
+        let conversation = try await engine.createConversation(
+            with: ConversationConfig(
+                systemMessage: Message(request.system ?? Self.bridgeSystemMessage),
+                initialMessages: [],
+                tools: [],
+                samplerConfig: sampler,
+                enableToolCallStreaming: false,
+                thinkingConfig: thinking,
+                automaticToolCalling: false,
+                enableResponseFormat: responseFormat != nil,
+                visualTokenBudget: 140
+            )
+        )
+
+        var contents: [Content] = request.images.map { .imageData($0) }
+        contents.append(.text(request.prompt))
+
+        var text = ""
+        for try await chunk in conversation.sendMessageStream(
+            Message(contents: contents),
+            maxOutputTokens: request.maxOutputTokens,
+            thinkingConfig: thinking,
+            responseFormat: responseFormat
+        ) {
+            if Task.isCancelled { break }
+            let piece = chunk.toString
+            guard !piece.isEmpty else { continue }
+            text += piece
+            onDelta(piece)
+        }
+
+        let info = try? conversation.getBenchmarkInfo()
+        return BridgeGenerationResult(
+            text: text,
+            promptTokens: info?.lastPrefillTokenCount ?? 0,
+            outputTokens: info?.lastDecodeTokenCount ?? 0,
+            timeToFirstToken: info?.timeToFirstTokenInSecond ?? 0,
+            outputTokensPerSecond: info?.lastDecodeTokensPerSecond ?? 0
+        )
+    }
+
+    private static var bridgeSystemMessage: String {
+        "You are the on-device reasoning engine for a paired field application. " +
+        "Answer only from the supplied prompt and images. " +
+        "If the evidence is insufficient, say so instead of guessing. " +
+        "When a response schema is supplied, emit only data that conforms to it."
     }
 }
 

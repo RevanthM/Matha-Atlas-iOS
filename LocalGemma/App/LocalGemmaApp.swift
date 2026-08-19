@@ -10,6 +10,7 @@ struct LocalGemmaApp: App {
             RootView()
                 .environmentObject(modelManager)
                 .preferredColorScheme(.dark)
+                .task { InferenceBridge.shared.activate() }
                 .onOpenURL { url in
                     _ = DispatchPairing.accept(url)
                 }

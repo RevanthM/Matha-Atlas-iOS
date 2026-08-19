@@ -21,6 +21,7 @@ struct ChatView: View {
     @State private var showKnowledge = false
     @State private var showGenerationSettings = false
     @State private var showDispatch = false
+    @State private var showBridge = false
     @State private var isProcessingAttachment = false
     @FocusState private var composerFocused: Bool
 
@@ -55,6 +56,10 @@ struct ChatView: View {
                     }
                     .sheet(isPresented: $showGenerationSettings) {
                         GenerationSettingsView(settings: store.generationSettings)
+                            .environmentObject(store)
+                    }
+                    .sheet(isPresented: $showBridge) {
+                        InferenceBridgeView()
                             .environmentObject(store)
                     }
                     .fullScreenCover(isPresented: $showDispatch) {
@@ -130,6 +135,10 @@ struct ChatView: View {
                         openDispatch: {
                             closeDrawer()
                             showDispatch = true
+                        },
+                        openBridge: {
+                            closeDrawer()
+                            showBridge = true
                         }
                     )
                     .frame(width: min(geometry.size.width * 0.88, 390))
